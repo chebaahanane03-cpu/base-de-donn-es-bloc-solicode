@@ -1,0 +1,201 @@
+🧩 Chapitre 1 – Identifier les entités et relations
+
+(شرح مبسّط + أمثلة)
+
+1️⃣ 🎯 Objectif pédagogique (شنو الهدف؟)
+
+الهدف من هاد الدرس هو:
+📌 نفهمو كيفاش نقراو واحد الحاجة (besoin fonctionnel)
+ومن بعد نعرفو:
+
+شنو هما الكيانات (Entités)
+
+شنو هما الخصائص ديالهم (Attributs)
+
+وشنو هما العلاقات (Relations)
+باش نوجدو قاعدة بيانات Relationnelle.
+
+👉 يعني قبل ما نكتب SQL ولا Tables، خاصنا نفكرو وننظمو المعلومات.
+
+2️⃣ 📚 Concepts abordés (المفاهيم الأساسية)
+🔹 1. شنو هي Entité ؟
+
+Entité = حاجة مهمة فالنظام خاصها تتخزن فـ قاعدة البيانات.
+
+📌 أمثلة:
+
+Utilisateur (مستخدم)
+
+Article (مقال)
+
+Commande (طلب)
+
+Produit (منتج)
+
+🧠 قاعدة ذهبية:
+
+إلا كانت الحاجة عندها وجود مستقل وتقدر نخزنو معلومات عليها → غالباً هي Entité.
+
+🔹 2. شنو هو Attribut ؟
+
+Attribut = معلومة كتوصّف Entité.
+
+📌 مثال:
+
+Entité: Utilisateur
+
+id
+
+nom
+
+email
+
+mot_de_passe
+
+👉 يعني:
+
+Entité = Table
+Attribut = Colonne
+
+🔹 3. Relations بين Entités
+
+Relation = الرابط بين جوج Entités.
+
+أنواع العلاقات:
+✅ 1–1 (واحد لواحد)
+
+مثال:
+
+Utilisateur ↔ Profil
+كل مستخدم عندو بروفايل واحد فقط.
+
+✅ 1–N (واحد لعدة)
+
+مثال:
+
+Utilisateur → Article
+مستخدم واحد يقدر يكتب بزاف ديال المقالات.
+
+✅ N–N (عدة لعدة)
+
+مثال:
+
+Étudiant ↔ Cours
+طالب يقدر يتسجل فعدة كورسات، وكورس فيه عدة طلاب.
+
+⚠️ ملاحظة:
+Relation N–N كتحتاج Table وسيطة.
+
+🔹 4. Cardinalités
+
+Cardinalité = شحال من مرة يمكن ترتبط Entité مع أخرى.
+
+📌 أمثلة:
+
+0 (ماشي ضروري)
+
+1 (ضروري)
+
+plusieurs (عدة)
+
+مثال:
+
+Article → Commentaire
+مقال يمكن:
+
+يكون فيه 0 تعليق
+
+أو عدة تعاليق
+
+3️⃣ 🧠 Explication théorique (الفكرة العامة)
+
+كنقراو الوصف ديال المشروع
+
+كنقلبو على الأسماء المهمة → غالباً Entités
+
+كنقلبو على الأفعال → غالباً Relations
+
+📌 مثال:
+
+Utilisateur rédige Article
+
+Utilisateur = Entité
+
+Article = Entité
+
+rédige = Relation
+
+4️⃣ 🛠 Tutoriel pratique (تطبيـق عملي)
+📝 السيناريو:
+
+“Un site de blog contient des utilisateurs qui rédigent des articles. Les lecteurs peuvent laisser des commentaires sur ces articles.”
+
+🔹 Étape 1 : نقرّاو السيناريو مزيان
+
+كنطرحو راسنا:
+
+شكون الفاعلين؟
+
+شنو الحاجات اللي خاصها تتخزن؟
+
+🔹 Étape 2 : تحديد Entités
+
+لقينا:
+
+Utilisateur
+
+Article
+
+Commentaire
+
+🔹 Étape 3 : تحديد Attributs
+🧍 Utilisateur
+
+id
+
+nom
+
+email
+
+rôle
+
+📝 Article
+
+id
+
+titre
+
+contenu
+
+date_pub
+
+💬 Commentaire
+
+id
+
+contenu
+
+auteur
+
+date
+
+🔹 Étape 4 : تحديد Relations
+
+Utilisateur → Article
+1 utilisateur rédige plusieurs articles (1–N)
+
+Article → Commentaire
+1 article reçoit plusieurs commentaires (1–N)
+
+🔹 Étape 5 : Table d’analyse
+Entité	Attributs clés	Relations
+Utilisateur	id, nom, email	Rédige des articles (1–N)
+Article	id, titre, contenu	Reçoit des commentaires (1–N)
+Commentaire	id, contenu, date	Appartient à un article (N–1)
+5️⃣ 🧾 Résumé سريع (باش تحفّظ)
+
+✔ Entité = حاجة رئيسية فالنظام
+✔ Attribut = معلومة كتوصّف Entité
+✔ Relation = الرابط بين Entités
+✔ Cardinalité = شحال من مرة كتوقع العلاقة
+✔ هاد الخطوة هي الأساس باش نرسمو MCD
