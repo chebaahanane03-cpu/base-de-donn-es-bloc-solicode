@@ -1,0 +1,156 @@
+🧩 Chapitre 4 – Créer des tables avec types et contraintes
+1️⃣ 🎯 شنو هو الهدف؟
+
+📌 تولّي قادرة:
+
+تكتبي CREATE TABLE
+
+تختاري type المناسب لكل معلومة
+
+تحمي الداتا بـ contraintes
+
+تربطي Tables بـ FOREIGN KEY
+
+يعني:
+
+MLD ➜ SQL حقيقي
+
+2️⃣ 🧠 قبل ما نكتب الكود (الفهم أولاً)
+🗂 Table = Entité
+🧱 Colonne = Attribut
+🔑 PRIMARY KEY = رقم خاص بكل سطر
+🔗 FOREIGN KEY = رابط مع Table أخرى
+3️⃣ 📦 Types de données (بأسلوب بسيط)
+🔢 INT
+
+أرقام صحيحة
+
+ids
+
+🔤 VARCHAR(n)
+
+نص قصير
+
+nom, email
+
+📝 TEXT
+
+نص طويل
+
+contenu
+
+📅 DATE
+
+تاريخ
+
+✅ BOOLEAN
+
+true / false
+
+📌 القاعدة:
+
+قصير → VARCHAR
+طويل → TEXT
+رقم → INT
+
+4️⃣ 🔐 Contraintes (علاش كنستعملوهم؟)
+🔑 PRIMARY KEY
+
+كتعرف كل سطر بوحدو
+
+ما كتتعاودش
+
+🚫 NOT NULL
+
+خاص القيمة تكون موجودة
+
+⭐ UNIQUE
+
+ما يتكررش (email)
+
+🔄 AUTO_INCREMENT
+
+الرقم كيزيد بوحدو
+
+🔗 FOREIGN KEY
+
+كترّبط Table بـ Table أخرى
+
+5️⃣ 🧪 دابا نطبّقو خطوة بخطوة
+🟦 Étape 1: Table Utilisateur
+CREATE TABLE Utilisateur (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE,
+  mot_de_passe VARCHAR(255) NOT NULL
+);
+
+
+🧠 الشرح:
+
+id → رقم تلقائي
+
+nom → ضروري
+
+email → ما يتكررش
+
+mot_de_passe → طويل شوية
+
+🟦 Étape 2: Table Article
+CREATE TABLE Article (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titre VARCHAR(150) NOT NULL,
+  contenu TEXT NOT NULL,
+  date_pub DATE,
+  id_utilisateur INT,
+  FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id)
+);
+
+
+🧠 المهم هنا:
+
+id_utilisateur هو FK
+
+كيربط المقال بالمستخدم
+
+🟦 Étape 3: Table Commentaire
+CREATE TABLE Commentaire (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  contenu TEXT NOT NULL,
+  auteur VARCHAR(100),
+  date_commentaire DATE,
+  id_article INT,
+  FOREIGN KEY (id_article) REFERENCES Article(id)
+);
+
+
+🧠 id_article:
+
+كيقول هاد التعليق تابع لهاد المقال
+
+6️⃣ 🧪 كيفاش نتأكدو؟
+📌 نشوفو Tables:
+SHOW TABLES;
+
+📌 نشوفو Structure:
+DESCRIBE Utilisateur;
+DESCRIBE Article;
+DESCRIBE Commentaire;
+
+7️⃣ 🟥 أخطاء شائعة (ردّي بالك)
+
+❌ نخلق Table فيها FK قبل Table الأصلية
+✔ خاص Utilisateur قبل Article
+
+❌ ننسى PRIMARY KEY
+✔ كل Table خاصها PK
+
+❌ نوع غلط (INT للاسم)
+✔ نص = VARCHAR / TEXT
+
+8️⃣ 🧾 خلاصة للحفظ (Exam)
+
+✔ CREATE TABLE = إنشاء Table
+✔ PRIMARY KEY = تعريف السطر
+✔ FOREIGN KEY = ربط Tables
+✔ Contraintes = حماية الداتا
